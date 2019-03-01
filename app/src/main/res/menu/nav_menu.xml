@@ -6,6 +6,11 @@
         android:title="首页"
         android:icon="@drawable/ic_home"
         />
+     <item
+         android:id="@+id/top_stories"
+         android:title="近日热点"
+         android:icon="@drawable/fire"
+         />
     </group>
 
 </menu>

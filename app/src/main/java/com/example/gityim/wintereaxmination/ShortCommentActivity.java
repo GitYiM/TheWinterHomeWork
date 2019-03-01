@@ -8,11 +8,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Adapter;
 
 import com.example.gityim.wintereaxmination.Adapter.CommentAdapter;
+import com.example.gityim.wintereaxmination.bean.Comment;
+import com.example.gityim.wintereaxmination.http.HttpCallbackListener;
+import com.example.gityim.wintereaxmination.http.HttpConnect;
 
 import org.json.JSONArray;
 import org.json.JSONException;

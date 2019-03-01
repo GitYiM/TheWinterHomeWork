@@ -1,4 +1,4 @@
-package com.example.gityim.wintereaxmination;
+package com.example.gityim.wintereaxmination.bean;
 
 public class Comment {
 

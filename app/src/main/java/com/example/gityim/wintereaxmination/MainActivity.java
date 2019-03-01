@@ -3,21 +3,16 @@ package com.example.gityim.wintereaxmination;
 
 import android.Manifest;
 import android.annotation.TargetApi;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentUris;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Looper;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -26,32 +21,25 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.JsonReader;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.gityim.wintereaxmination.Adapter.InfoListAdapter;
-import com.example.gityim.wintereaxmination.Adapter.ViewPagerAdapter;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.example.gityim.wintereaxmination.bean.Item;
+import com.example.gityim.wintereaxmination.http.HttpCallbackListener;
+import com.example.gityim.wintereaxmination.http.HttpConnect;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,9 +52,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.logging.Handler;
 
-import cn.bingoogolapple.bgabanner.BGABanner;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -118,10 +104,15 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.ic_menu); //改变图标
         }
-        navigationView.setCheckedItem(R.id.home_item);
+        navigationView.setCheckedItem(R.id.top_stories);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int id=menuItem.getItemId();
+                if(id==R.id.top_stories){
+                    Intent intent = new Intent(MainActivity.this,FireNewsActivity.class);
+                    startActivity(intent);
+                }
                 mDrawerLayout.closeDrawers();
                 return true;
             }

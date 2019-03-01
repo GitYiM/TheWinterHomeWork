@@ -1,7 +1,6 @@
 package com.example.gityim.wintereaxmination.Adapter;
 
 import android.content.Context;
-import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,12 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.gityim.wintereaxmination.Item;
+import com.example.gityim.wintereaxmination.FireNewsActivity;
+import com.example.gityim.wintereaxmination.bean.Item;
 import com.example.gityim.wintereaxmination.R;
 import com.example.gityim.wintereaxmination.RecyclerClickListener;
 
 import java.util.ArrayList;
-import java.util.logging.Handler;
 
 public class InfoListAdapter extends RecyclerView.Adapter<InfoListAdapter.InfoViewHolder> {
     private ArrayList<Item> mData;
@@ -42,12 +41,12 @@ public class InfoListAdapter extends RecyclerView.Adapter<InfoListAdapter.InfoVi
             this.mlistener=listener;
             this.itemView.setOnClickListener(this);
         }
-        public InfoViewHolder(View itemView) {
-            super(itemView);
-            title = itemView.findViewById(R.id.item_title);
-            pic = itemView.findViewById(R.id.item_image);
-            headTitle = itemView.findViewById(R.id.info_title);
-        }
+//        public InfoViewHolder(View itemView) {
+//            super(itemView);
+//            title = itemView.findViewById(R.id.item_title);
+//            pic = itemView.findViewById(R.id.item_image);
+//            headTitle = itemView.findViewById(R.id.info_title);
+//        }
 
 
         @Override
@@ -122,13 +121,4 @@ public class InfoListAdapter extends RecyclerView.Adapter<InfoListAdapter.InfoVi
     public void resetDatas() {
         mData = new ArrayList<>();
     }
-    public long getItemId(int position){
-        return position;
-    }
-
-
-
-
-
-
 }

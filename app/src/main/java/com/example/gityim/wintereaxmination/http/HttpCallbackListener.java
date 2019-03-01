@@ -1,4 +1,4 @@
-package com.example.gityim.wintereaxmination;
+package com.example.gityim.wintereaxmination.http;
 
 public interface HttpCallbackListener {
     void onFinish(String response);

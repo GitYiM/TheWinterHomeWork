@@ -1,7 +1,6 @@
 package com.example.gityim.wintereaxmination;
 
 import android.content.Intent;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,13 +10,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.example.gityim.wintereaxmination.http.HttpCallbackListener;
+import com.example.gityim.wintereaxmination.http.HttpConnect;
 import com.google.gson.Gson;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.utils.L;
 
 import org.json.JSONException;
 import org.json.JSONObject;

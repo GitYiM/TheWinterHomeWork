@@ -1,7 +1,7 @@
-package com.example.gityim.wintereaxmination;
+package com.example.gityim.wintereaxmination.http;
 
 
-import android.util.Log;
+import com.example.gityim.wintereaxmination.http.HttpCallbackListener;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

@@ -11,6 +11,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.gityim.wintereaxmination.Adapter.CommentAdapter;
+import com.example.gityim.wintereaxmination.bean.Comment;
+import com.example.gityim.wintereaxmination.http.HttpCallbackListener;
+import com.example.gityim.wintereaxmination.http.HttpConnect;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,6 +54,7 @@ public class CommentActivity extends AppCompatActivity {
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this);
         mRecyclerview.setLayoutManager(mLinearLayoutManager);
         mAdapter = new CommentAdapter(mComments, CommentActivity.this);
+        mAdapter.setHasStableIds(true);
         mRecyclerview.setAdapter(mAdapter);
     }
 
@@ -115,10 +119,12 @@ public class CommentActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+
                 mAdapter.notifyDataSetChanged();//通知适配器刷新数据
             }
         });
 
     }
+
 
 }

@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.gityim.wintereaxmination.R;
-import com.example.gityim.wintereaxmination.Comment;
+import com.example.gityim.wintereaxmination.bean.Comment;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -81,7 +81,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             personPhoto=itemView.findViewById(R.id.person_photo);
         }
     }
-
+    public long getItemId(int position){
+        return position;
+    }
 
 
 }
