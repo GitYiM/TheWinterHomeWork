@@ -14,28 +14,21 @@
 
 ## 功能展示
 + 启动界面<br>
-![](readmefile/splash screen.gif)
+![](https://github.com/GitYiM/TheWinterHomeWork/blob/master/readmefile/splash%20screen.gif)
 
 + 加载过往、刷新问题列表<br>
-![](readmefile/previous and refresh.gif)
+![](https://github.com/GitYiM/TheWinterHomeWork/blob/master/readmefile/previous%20and%20refresh.gif )
 
-+ exciting、naive、收藏<br>
-![](readmefile/收藏.gif)
++ 版本查看<br>
+![](https://github.com/GitYiM/TheWinterHomeWork/blob/master/readmefile/version.gif)
 
-+ 回答、采纳<br>
-![](readmefile/回答.gif)
++ 详情页br>
+![](https://github.com/GitYiM/TheWinterHomeWork/blob/master/readmefile/detailed%20information.gif)
 
-+ 回答列表<br>
-![](readmefile/回答列表.gif)
++ 运行时权限SD卡 拍照 换头像<br>
+![](https://github.com/GitYiM/TheWinterHomeWork/blob/master/readmefile/change_headphoto.gif)
 
-+ 提问<br>
-![](readmefile/提问.gif)
++ 长和短评论查看<br>
+![](https://github.com/GitYiM/TheWinterHomeWork/blob/master/readmefile/Long%26short%20comment.gif)
 
-+ 收藏列表<br>
-![](readmeFile/收藏列表.gif)
 
-+ 更改头像<br>
-![](readmeFile/更改头像.gif)
-
-+ 更改密码<br>
-![](readmeFile/更改密码.gif)
