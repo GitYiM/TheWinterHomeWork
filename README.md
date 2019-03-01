@@ -10,3 +10,32 @@
 6.长评论查看
 7.短评论查看
 +6.0运行时权限，用相册图片改变头像
+
+
+## 功能展示
++ 启动界面<br>
+![](readmeFile/登录.gif)
+
++ 加载、刷新问题列表<br>
+![](readmeFile/主页.gif)
+
++ exciting、naive、收藏<br>
+![](readmeFile/收藏.gif)
+
++ 回答、采纳<br>
+![](readmeFile/回答.gif)
+
++ 回答列表<br>
+![](readmeFile/回答列表.gif)
+
++ 提问<br>
+![](readmeFile/提问.gif)
+
++ 收藏列表<br>
+![](readmeFile/收藏列表.gif)
+
++ 更改头像<br>
+![](readmeFile/更改头像.gif)
+
++ 更改密码<br>
+![](readmeFile/更改密码.gif)
