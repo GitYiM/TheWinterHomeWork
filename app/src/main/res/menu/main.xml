@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/night_item"
+        android:title="夜间模式"/>
+    <item
+        android:id="@+id/setting_item"
+        android:title="设置选项"/>
+    <item
+        android:id="@+id/message"
+        android:icon="@drawable/ic_message"
+        android:title="消息"
+        app:showAsAction="always"
+        />
+</menu>

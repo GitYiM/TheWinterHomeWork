@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/share"
+        android:icon="@drawable/ic_share_black_24dp"
+        android:title="消息"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/collection"
+        android:icon="@drawable/ic_collection"
+        app:showAsAction="always"
+
+        />
+    <item
+        android:id="@+id/comment"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_comment_black_24dp"
+        android:title="评论" />
+
+    <item
+        android:id="@+id/thumb_up"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_thumb_up_black_24dp"
+        android:title="点赞" />
+
+
+
+</menu>

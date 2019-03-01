@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>  <!--自定义颜色类型属性-->
+<resources>
+    <attr name="colorText" format="color"/>
+    <attr name="colorBackground" format="color"/>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#009dd7</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="skyBlue">#46a3ff</color>
+    <color name="white">#FFFFFF</color>
+    <color name="colorPrimaryN">#3F3F3F</color>
+    <color name="primaryDarkN">#3A3A3A</color>
+    <color name="accentN">#868686</color>
+    <color name="textN">#8A9599</color>
+    <color name="backgroundN">#3F3F3F</color>
+
+
+</resources>
