@@ -38,7 +38,7 @@ public class FireNewsActivity extends AppCompatActivity implements RecyclerClick
         if(actionBar!=null){
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        actionBar.setTitle("今日热闻");
+        actionBar.setTitle("近日热闻");
         initData();
         initView();
     }

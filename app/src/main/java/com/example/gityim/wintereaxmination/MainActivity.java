@@ -139,7 +139,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
             public void onRefresh() {
                 refreshinfo();
                 swipeRefresh.setRefreshing(false);
-
             }
         });
 
