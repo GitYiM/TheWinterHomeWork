@@ -1,2 +1,12 @@
 # *知乎日报*
-![日报icon](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551425181303&di=f5062bbe7de4413ecf8c9802dfe49e99&imgtype=0&src=http%3A%2F%2Fcdn6.image.apk.gfan.com%2Fasdf%2FPImages%2F2013%2F6%2F28%2F570040_0b40caa2-2165-46e5-8c52-42a7397e2427_icon.jpg)
+![日报icon]()
+重庆邮电大学红岩移动开发部Android学员2018年寒假考核作业
+## 应用简介
++实现API：1.splash sreen
+2.软件版本查询
+3.最新消息获取
+4.消息内容获取
+5.过往消息获取新闻额外信息（评论数量、点赞数量）
+6.长评论查看
+7.短评论查看
++6.0运行时权限，用相册图片改变头像
