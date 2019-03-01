@@ -32,4 +32,4 @@
 ![](https://github.com/GitYiM/TheWinterHomeWork/blob/master/readmefile/Long%26short%20comment.gif)
 
 + 近日热闻<br>
-![](https://github.com/GitYiM/TheWinterHomeWork/blob/master/readmefile/fire_news.gif)
+![](https://github.com/GitYiM/TheWinterHomeWork/blob/master/readmefile/fire_news1.gif)
