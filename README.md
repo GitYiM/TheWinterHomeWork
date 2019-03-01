@@ -1,5 +1,5 @@
 # *知乎日报*
-![日报icon]()
+![日报icon](readmefile/icon2.png)
 重庆邮电大学红岩移动开发部Android学员2018年寒假考核作业
 ## 应用简介
 +实现API：1.splash sreen\
