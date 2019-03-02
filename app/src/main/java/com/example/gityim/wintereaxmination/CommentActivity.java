@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.gityim.wintereaxmination.Adapter.CommentAdapter;
 import com.example.gityim.wintereaxmination.bean.Comment;
@@ -57,6 +58,7 @@ public class CommentActivity extends AppCompatActivity {
         mAdapter = new CommentAdapter(mComments, CommentActivity.this);
         mAdapter.setHasStableIds(true);
         mRecyclerview.setAdapter(mAdapter);
+        //设置点赞的点击事件
     }
 
     private void getCommentFromNet() {
@@ -87,6 +89,7 @@ public class CommentActivity extends AppCompatActivity {
                 listComment.setAuthor(item.optString("author"));
                 listComment.setAvatar(item.optString("avatar"));
                 listComment.setContent(item.optString("content"));
+                listComment.setLikes(item.optInt("likes"));
                 mComments.add(listComment);
             }
             showResponse();

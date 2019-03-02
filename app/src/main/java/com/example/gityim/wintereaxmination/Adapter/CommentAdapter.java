@@ -1,6 +1,7 @@
 package com.example.gityim.wintereaxmination.Adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -23,7 +24,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentViewHolder> {
     private ArrayList<Comment> mComments;
     private Context context;
-    CommentViewHolder holder=null;
+
+
+
 
 
     public CommentAdapter(ArrayList<Comment> mComments, Context context) {
@@ -38,37 +41,58 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 //        View view=LayoutInflater.from(context).inflate(R.layout.comment_item,viewGroup,false);
 //        holder =new CommentViewHolder(view);
 //        return holder;
+        if(context==null){
+            context=viewGroup.getContext();
+        }
+
         LayoutInflater inflater =LayoutInflater.from(context);
         View view =inflater.inflate(R.layout.comment_item,viewGroup,false);
-        holder =new CommentViewHolder(view);
+        final CommentViewHolder holder =new CommentViewHolder(view);
+
+        holder.like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isPressed=false;
+                int position =holder.getAdapterPosition();
+                final int nums=mComments.get(position).getLikes();
+                int num1=nums,num2=nums;
+                if(!isPressed){
+                    num1=nums+1;
+                    holder.like.setText(num1+"");
+                    isPressed=true;
+                }else{
+                    num2=num1-1;
+                    holder.like.setText(num2+"");
+                    isPressed=false;
+                }
+
+
+            }
+        });
+        //设置点赞点击事件
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull CommentAdapter.CommentViewHolder commentViewHolder, int i) {
-        String name=mComments.get(i).getAuthor();
-        holder.name.setTag(name);
-        if(name==holder.name.getTag()){
-            holder.name.setText(mComments.get(i).getAuthor());
-        }
-        String comment =mComments.get(i).getContent();
-        holder.comment.setTag(comment);
-        if(comment.equals(holder.comment.getTag())){
-            holder.comment.setText(mComments.get(i).getContent());
-        }
+        CommentViewHolder holder =(CommentViewHolder) commentViewHolder;
+        holder.name.setText(mComments.get(i).getAuthor());
+        holder.comment.setText(mComments.get(i).getContent());
+        final int nums= mComments.get(i).getLikes();
+        holder.like.setText(nums+"");
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         long timeLong = Long.valueOf(mComments.get(i).getTime());
         holder.time.setText(sdf.format(new Date(timeLong*1000L)));
         Log.d("时间", "onBindViewHolder: "+sdf.format(new Date(mComments.get(i).getTime())));
         Glide.with(context).load(mComments.get(i).getAvatar()).placeholder(R.drawable.timg).into(holder.personPhoto);
     }
-
     @Override
     public int getItemCount() {
         return mComments.size();
     }
 
     public class CommentViewHolder extends RecyclerView.ViewHolder {
+        TextView like;
         TextView name;
         TextView comment;
         TextView time;
@@ -79,7 +103,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             name=itemView.findViewById(R.id.person_name);
             comment=itemView.findViewById(R.id.comment_text);
             personPhoto=itemView.findViewById(R.id.person_photo);
+            like=itemView.findViewById(R.id.praise_text);
         }
+
     }
     public long getItemId(int position){
         return position;

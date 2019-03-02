@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
     private ArrayList<String> bantitles;
     private ArrayList<String> banimgs;
     private ArrayList<String> banids;
-    private int otherDate = 0;
+    private int otherDate = -1;
 
     //运行时权限
     private Uri imageUri;
@@ -108,9 +108,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                int id=menuItem.getItemId();
-                if(id==R.id.top_stories){
-                    Intent intent = new Intent(MainActivity.this,FireNewsActivity.class);
+                int id = menuItem.getItemId();
+                if (id == R.id.top_stories) {
+                    Intent intent = new Intent(MainActivity.this, FireNewsActivity.class);
                     startActivity(intent);
                 }
                 mDrawerLayout.closeDrawers();
@@ -251,14 +251,14 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
 
 
     private void loadMoreData() {
-        otherDate++;
+        otherDate = otherDate + 1;
         getInfoFromNet();
     }
 
     //获取网络数据方法
     private void getInfoFromNet() {
         String url = null;
-        if (otherDate == 0) {
+        if (otherDate == -1) {
             url = "http://news-at.zhihu.com/api/4/news/latest";
         } else {
             url = "http://news-at.zhihu.com/api/4/news/before/" + getDate();
@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
     private String getDate() {
         Calendar currentDate = Calendar.getInstance();
         currentDate.setTime(new Date());
-        currentDate.add(Calendar.DAY_OF_MONTH, -(otherDate + 1));//other天前的日子
+        currentDate.add(Calendar.DAY_OF_MONTH, -(otherDate));//other天前的日子
         String date = new SimpleDateFormat("yyyyMMdd").format(currentDate.getTime());// 规定日期格式
         return date;
     }
@@ -299,7 +299,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
                 JSONArray images = item.optJSONArray("images");
                 Item listItem = new Item();
                 //创建list每一个对象，并封装
-                listItem.setHeadTitle(getDate());
+                if (i == 0) {
+                    listItem.setHeadTitle(getDate());
+                }
                 listItem.setTitle(item.optString("title"));
                 listItem.setPicurl(images.optString(0));
                 listItem.setDate(getDate());

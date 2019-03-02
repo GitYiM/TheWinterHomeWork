@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 
 //1.属性必须私有化2.必有一个无参的构造函数3，私有属性通过public方法共享给其他程序，遵行一定的命名规范
 public class Item {
-    private String headTitle;
+    private String headTitle = null;
     private String id;
     private String title;
     private String date;

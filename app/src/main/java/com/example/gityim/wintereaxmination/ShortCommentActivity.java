@@ -40,7 +40,6 @@ public class ShortCommentActivity extends AppCompatActivity {
         id = intent.getStringExtra("id");
         String shortComment = intent.getStringExtra("short_comments");
         actionBar.setTitle(shortComment+"条短评论");
-
         RecyclerView shortList =findViewById(R.id.short_comment_list);
         Log.d("QWQ", "onFinish:shortComments ");
         initData();
@@ -50,6 +49,7 @@ public class ShortCommentActivity extends AppCompatActivity {
         shortList.setLayoutManager(mLinearLayoutManager);
         Log.d("QWQ3", "onFinish:shortComments ");
         mAdapter=new CommentAdapter(commentList,ShortCommentActivity.this);
+        mAdapter.setHasStableIds(true);
         Log.d("QWQ4", "onFinish:shortComments ");
         shortList.setAdapter(mAdapter);
         Log.d("QWQ5", "onFinish:shortComments ");

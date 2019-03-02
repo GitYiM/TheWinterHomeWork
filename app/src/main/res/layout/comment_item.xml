@@ -48,6 +48,19 @@
                 android:text="shijian "
                 android:paddingTop="20dp"
                 android:paddingBottom="10dp"/>
+            <TextView
+                android:id="@+id/praise_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="10sp"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:layout_alignBottom="@id/person_name"
+                android:layout_alignTop="@id/person_name"
+                android:drawableLeft="@drawable/praise"
+                android:paddingRight="5dp"
+                />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
