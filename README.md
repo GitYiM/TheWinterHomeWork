@@ -17,7 +17,7 @@
 ![](https://github.com/GitYiM/TheWinterHomeWork/blob/master/readmefile/splash%20screen.gif)
 
 + 加载过往、刷新问题列表<br>
-![](https://github.com/GitYiM/TheWinterHomeWork/blob/master/readmefile/previous%20and%20refresh.gif )
+![](https://github.com/GitYiM/TheWinterHomeWork/blob/master/readmefile/loadMore%20and%20refresh.gif )
 
 + 版本查看<br>
 ![](https://github.com/GitYiM/TheWinterHomeWork/blob/master/readmefile/version.gif)
