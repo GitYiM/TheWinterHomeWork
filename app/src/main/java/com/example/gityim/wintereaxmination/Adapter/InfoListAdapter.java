@@ -15,6 +15,7 @@ import com.example.gityim.wintereaxmination.bean.Item;
 import com.example.gityim.wintereaxmination.R;
 import com.example.gityim.wintereaxmination.RecyclerClickListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class InfoListAdapter extends RecyclerView.Adapter<InfoListAdapter.InfoViewHolder> {
@@ -81,11 +82,13 @@ public class InfoListAdapter extends RecyclerView.Adapter<InfoListAdapter.InfoVi
         InfoViewHolder holder =(InfoViewHolder) infoViewHolder;
         holder.title.setText(mData.get(i).getTitle());
         Glide.with(mContext).load(mData.get(i).getPicurl()).placeholder(R.drawable.timg).into(holder.pic);
-//        final String tag=mData.get(i).getHeadTitle();
-//        if (tag!=null){
-//            holder.headTitle.setText(mData.get(i).getHeadTitle());
-//            holder.headTitle.setVisibility(View.VISIBLE);
-//        }
+        final String tag=mData.get(i).getHeadTitle();
+        if (tag!=null){
+            holder.headTitle.setText(mData.get(i).getHeadTitle());
+            holder.headTitle.setVisibility(View.VISIBLE);
+        }else {
+            holder.headTitle.setVisibility(View.GONE);
+        }
     }
 
     @Override

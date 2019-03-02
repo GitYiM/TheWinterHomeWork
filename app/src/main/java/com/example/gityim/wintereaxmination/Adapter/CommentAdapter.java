@@ -2,12 +2,14 @@ package com.example.gityim.wintereaxmination.Adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -49,7 +51,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         View view =inflater.inflate(R.layout.comment_item,viewGroup,false);
         final CommentViewHolder holder =new CommentViewHolder(view);
 
-        holder.like.setOnClickListener(new View.OnClickListener() {
+        holder.praise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean isPressed=false;
@@ -57,8 +59,10 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                 final int nums=mComments.get(position).getLikes();
                 int num1=nums,num2=nums;
                 if(!isPressed){
+
                     num1=nums+1;
                     holder.like.setText(num1+"");
+                    holder.praise.setImageResource(R.drawable.praised);
                     isPressed=true;
                 }else{
                     num2=num1-1;
@@ -92,6 +96,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     }
 
     public class CommentViewHolder extends RecyclerView.ViewHolder {
+        ImageView praise;
         TextView like;
         TextView name;
         TextView comment;
@@ -104,6 +109,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             comment=itemView.findViewById(R.id.comment_text);
             personPhoto=itemView.findViewById(R.id.person_photo);
             like=itemView.findViewById(R.id.praise_text);
+            praise=itemView.findViewById(R.id.praise_view);
         }
 
     }

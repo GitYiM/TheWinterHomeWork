@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ParseException;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.DocumentsContract;
@@ -79,12 +80,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
 //    private ViewPager viewPager;
 //    private ArrayList<View> pagerList;
 
-
     //弹窗
-    PopupWindow popupWindow;
-    Button takePhoto;
-    Button canBtn;
-    Button albumBtn;
+//    PopupWindow popupWindow;
+//    Button takePhoto;
+//    Button canBtn;
+//    Button albumBtn;
 
 
     @Override
@@ -288,6 +288,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
         return date;
     }
 
+
     private void parseJSONWithJSONObject(String JSONData) {
         try {
 
@@ -300,7 +301,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
                 Item listItem = new Item();
                 //创建list每一个对象，并封装
                 if (i == 0) {
-                    listItem.setHeadTitle(getDate());
+                    listItem.setHeadTitle(strToDateFormat(getDate()));
                 }
                 listItem.setTitle(item.optString("title"));
                 listItem.setPicurl(images.optString(0));
@@ -469,6 +470,20 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
             Toast.makeText(this, "Failed to get image", Toast.LENGTH_SHORT).show();
         }
     }
+
+    public static String strToDateFormat(String date) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+        formatter.setLenient(false);
+        Date newDate = null;
+        try {
+            newDate = formatter.parse(date);
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+        formatter = new SimpleDateFormat("yyyy-MM-dd");
+        return formatter.format(newDate);
+    }
+
 
 }
 

@@ -89,6 +89,7 @@ public class ShortCommentActivity extends AppCompatActivity {
                 listComment.setAuthor(item.optString("author"));
                 listComment.setAvatar(item.optString("avatar"));
                 listComment.setContent(item.optString("content"));
+                listComment.setLikes(item.optInt("likes"));
                 commentList.add(listComment);
             }
             showResponse();

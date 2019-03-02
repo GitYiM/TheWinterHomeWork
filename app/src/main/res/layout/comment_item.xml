@@ -48,6 +48,12 @@
                 android:text="shijian "
                 android:paddingTop="20dp"
                 android:paddingBottom="10dp"/>
+            <ImageView
+                android:id="@+id/praise_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/praise"
+                android:layout_toLeftOf="@id/praise_text"/>
             <TextView
                 android:id="@+id/praise_text"
                 android:layout_width="wrap_content"
@@ -58,7 +64,6 @@
                 android:gravity="center"
                 android:layout_alignBottom="@id/person_name"
                 android:layout_alignTop="@id/person_name"
-                android:drawableLeft="@drawable/praise"
                 android:paddingRight="5dp"
                 />
         </RelativeLayout>
