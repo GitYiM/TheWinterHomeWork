@@ -46,7 +46,7 @@ public class NewsInfoActivity extends AppCompatActivity {
         //CollapsingToolbarLayout collapsingToolbar = findViewById(R.id.collapsing_toolbar);
         //ImageView newsImageView = findViewById(R.id.newsHead_image);
         newsWebView = findViewById(R.id.news_webView);
-        newsWebView.getSettings().setJavaScriptEnabled(true);
+//        newsWebView.getSettings().setJavaScriptEnabled(true);
         newsWebView.setWebViewClient(new WebViewClient());
         String commentUrl="https://zhihu-daily.leanapp.cn/api/v1/contents/extra/"+id;
         HttpConnect.sendHttpRequest(commentUrl, new HttpCallbackListener() {

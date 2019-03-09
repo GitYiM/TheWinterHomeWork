@@ -33,8 +33,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gityim.wintereaxmination.Adapter.InfoListAdapter;
@@ -46,6 +45,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
     public static final int TAKE_PHOTO = 1;
     public static final int CHOOSE_PHOTO = 2;
     private CircleImageView photoView;
+    private TextView userName;
 
     //实现viewPager
 //    private ViewPager viewPager;
@@ -154,6 +155,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
         NavigationView mNavi = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
         photoView = headerView.findViewById(R.id.icon_image);
+        userName = headerView.findViewById(R.id.login_user_name);
         photoView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -197,7 +199,21 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
 
             }
         });
+        userName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("郁闷", "onClick: ");
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
 
+
+            }
+        });
+        Intent intent1 = getIntent();
+        Log.d("主活动返回值", "onCreate: " + intent1.getStringExtra("Username"));
+        if (intent1.getStringExtra("Username") != null) {
+            userName.setText(intent1.getStringExtra("Username"));
+        }
 
         //popupWindow点击事件失败
 //        Log.d("闪退3", "onClick: ");
@@ -249,6 +265,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
         }
     }
 
+    //    protected void onActivityResult(int RequestCode,int ResultCode,Intent data) {
+//
+//    }
+
 
     private void loadMoreData() {
         otherDate = otherDate + 1;
@@ -272,7 +292,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
 
             @Override
             public void onError(Exception e) {
-                Log.d("错误", "onError: ");
+                Log.d("网络请求错误", "onError: ");
                 e.printStackTrace();
             }
         });
@@ -352,7 +372,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
 
     //刷新数据方法
     private void refreshinfo() {
-        mDatas = dataReset();
+        mDatas.clear();
         String url = null;
         url = "http://news-at.zhihu.com/api/4/news/latest";
         HttpConnect.sendHttpRequest(url, new HttpCallbackListener() {
@@ -483,7 +503,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
         formatter = new SimpleDateFormat("yyyy-MM-dd");
         return formatter.format(newDate);
     }
-
 
 }
 

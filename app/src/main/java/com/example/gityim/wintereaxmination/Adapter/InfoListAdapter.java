@@ -21,8 +21,6 @@ import java.util.ArrayList;
 public class InfoListAdapter extends RecyclerView.Adapter<InfoListAdapter.InfoViewHolder> {
     private ArrayList<Item> mData;
     private Context mContext;
-
-
     private RecyclerClickListener mItemClicklistener;
 
 
@@ -90,12 +88,10 @@ public class InfoListAdapter extends RecyclerView.Adapter<InfoListAdapter.InfoVi
             holder.headTitle.setVisibility(View.GONE);
         }
     }
-
     @Override
     public int getItemCount() {
         return mData.size();
     }
-
 
     /*
         public static final int TYPE_HEADER =0;//headview
