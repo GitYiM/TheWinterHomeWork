@@ -39,12 +39,13 @@ public class InfoListAdapter extends RecyclerView.Adapter<InfoListAdapter.InfoVi
             this.mlistener = listener;
             this.itemView.setOnClickListener(this);
         }
-//        public InfoViewHolder(View itemView) {
-//            super(itemView);
-//            title = itemView.findViewById(R.id.item_title);
-//            pic = itemView.findViewById(R.id.item_image);
-//            headTitle = itemView.findViewById(R.id.info_title);
-//        }
+
+        public InfoViewHolder(View itemView) {
+            super(itemView);
+            title = itemView.findViewById(R.id.item_title);
+            pic = itemView.findViewById(R.id.item_image);
+            headTitle = itemView.findViewById(R.id.info_title);
+        }
 
 
         @Override
@@ -65,8 +66,18 @@ public class InfoListAdapter extends RecyclerView.Adapter<InfoListAdapter.InfoVi
     @NonNull
     @Override
     public InfoViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.info_item, viewGroup, false);
-        final InfoViewHolder holder = new InfoViewHolder(view, mItemClicklistener);
+        View view = null;
+        InfoViewHolder holder = null;
+        switch (i) {
+            case TYPE_HEADER:
+                holder = new InfoViewHolder(headView);
+                break;
+            case TYPE_NORMAL:
+                view = LayoutInflater.from(mContext).inflate(R.layout.info_item, viewGroup, false);
+                holder = new InfoViewHolder(view, mItemClicklistener);
+                break;
+        }
+
         return holder;
 
     }
@@ -77,48 +88,54 @@ public class InfoListAdapter extends RecyclerView.Adapter<InfoListAdapter.InfoVi
 
     @Override
     public void onBindViewHolder(@NonNull InfoViewHolder infoViewHolder, int i) {
-        InfoViewHolder holder =(InfoViewHolder) infoViewHolder;
-        holder.title.setText(mData.get(i).getTitle());
-        Glide.with(mContext).load(mData.get(i).getPicurl()).placeholder(R.drawable.timg).into(holder.pic);
-        final String tag=mData.get(i).getHeadTitle();
-        if (tag!=null){
-            holder.headTitle.setText(mData.get(i).getHeadTitle());
+        if (getItemViewType(i)==TYPE_HEADER) return;
+        final int pos=getRealPosition(infoViewHolder);
+        InfoViewHolder holder = (InfoViewHolder) infoViewHolder;
+        holder.title.setText(mData.get(pos).getTitle());
+        Glide.with(mContext).load(mData.get(pos).getPicurl()).placeholder(R.drawable.timg).into(holder.pic);
+        final String tag = mData.get(pos).getHeadTitle();
+        if (tag != null) {
+            holder.headTitle.setText(mData.get(pos).getHeadTitle());
             holder.headTitle.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             holder.headTitle.setVisibility(View.GONE);
         }
     }
+
     @Override
     public int getItemCount() {
-        return mData.size();
+//        return mData.size();
+        return headView==null? mData.size():mData.size()+1;
     }
 
-    /*
-        public static final int TYPE_HEADER =0;//headview
-        public static final int TYPE_NORMAL=1;//item
-        private View headView;//banner
 
-        public void setHeadView(View headView) {
-            this.headView = headView;
-            notifyItemInserted(0);
-        }
-        public View getHeadView(){
-            return headView;
-        }
-        public int getItemViewType(int position){
-            if(headView==null){
-                return TYPE_NORMAL;
-            }
-            if(position==0){
-                return TYPE_HEADER;
-            }
+    public static final int TYPE_HEADER = 0;//headview
+    public static final int TYPE_NORMAL = 1;//item
+    private View headView;//banner
+
+    public void setHeadView(View headView) {
+        this.headView = headView;
+        notifyItemInserted(0);
+    }
+
+    public View getHeadView() {
+        return headView;
+    }
+
+    public int getItemViewType(int position) {
+        if (headView == null) {
             return TYPE_NORMAL;
         }
-        private int getRealPosition(RecyclerView.ViewHolder holder){
-            int position=holder.getLayoutPosition();
-            return headView==null?position:position-1;
-        }*/
-    public void resetDatas() {
-        mData = new ArrayList<>();
+        if (position == 0) {
+            return TYPE_HEADER;
+        }
+        return TYPE_NORMAL;
     }
+
+    private int getRealPosition(RecyclerView.ViewHolder holder) {
+        int position = holder.getLayoutPosition();
+        return headView == null ? position : position - 1;
+    }
+
+
 }

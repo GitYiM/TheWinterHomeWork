@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -46,8 +47,24 @@ public class NewsInfoActivity extends AppCompatActivity {
         //CollapsingToolbarLayout collapsingToolbar = findViewById(R.id.collapsing_toolbar);
         //ImageView newsImageView = findViewById(R.id.newsHead_image);
         newsWebView = findViewById(R.id.news_webView);
+        WebSettings webSettings = newsWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setLoadWithOverviewMode(true);
 //        newsWebView.getSettings().setJavaScriptEnabled(true);
-        newsWebView.setWebViewClient(new WebViewClient());
+        newsWebView.setWebViewClient(new WebViewClient(){
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                String javaScript = "javascript:function hideOther() {"+
+                        "body = document.getElementsByTagName('body');"+
+                        "present = document.getElementByTagName('div')[1];"+
+                        "present.style.display ='none';}";
+                view.loadUrl(javaScript);
+                view.loadUrl("javascript:hideOther();");
+
+            }
+        });
         String commentUrl="https://zhihu-daily.leanapp.cn/api/v1/contents/extra/"+id;
         HttpConnect.sendHttpRequest(commentUrl, new HttpCallbackListener() {
             @Override
@@ -96,6 +113,12 @@ public class NewsInfoActivity extends AppCompatActivity {
 
 
     }
+
+//    private void hideSomeView() {
+//        try{
+//
+//        }catch ()
+//    }
 
     public boolean onCreateOptionsMenu(Menu menu) {//允许菜单显示出来
 

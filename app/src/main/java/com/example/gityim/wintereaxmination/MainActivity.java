@@ -30,12 +30,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.gityim.wintereaxmination.Adapter.InfoListAdapter;
 import com.example.gityim.wintereaxmination.bean.Item;
 import com.example.gityim.wintereaxmination.http.HttpCallbackListener;
@@ -54,6 +57,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import cn.bingoogolapple.bgabanner.BGABanner;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -131,6 +135,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
         mAdapter = new InfoListAdapter(mDatas, MainActivity.this);
         mInfoList.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
+        //实现轮播图
+        initbannar();
 
         //实现下拉刷新
         swipeRefresh = findViewById(R.id.swipe_refresh);
@@ -239,6 +245,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
 
     }
 
+
+
     //拍照回调
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
@@ -271,7 +279,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
 
 
     private void loadMoreData() {
-        otherDate = otherDate + 1;
+        otherDate = otherDate+1;
+        Log.d("事件", "loadMoreData: "+otherDate);
         getInfoFromNet();
     }
 
@@ -282,6 +291,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
             url = "http://news-at.zhihu.com/api/4/news/latest";
         } else {
             url = "http://news-at.zhihu.com/api/4/news/before/" + getDate();
+            Log.d("事件", "getInfoFromNet: "+getDate());
         }
         HttpConnect.sendHttpRequest(url, new HttpCallbackListener() {
             @Override
@@ -307,6 +317,13 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
         String date = new SimpleDateFormat("yyyyMMdd").format(currentDate.getTime());// 规定日期格式
         return date;
     }
+    private String getDate1() {
+        Calendar currentDate = Calendar.getInstance();
+        currentDate.setTime(new Date());
+        currentDate.add(Calendar.DAY_OF_MONTH, -(otherDate+1));//other天前的日子
+        String date = new SimpleDateFormat("yyyyMMdd").format(currentDate.getTime());// 规定日期格式
+        return date;
+    }
 
 
     private void parseJSONWithJSONObject(String JSONData) {
@@ -321,7 +338,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
                 Item listItem = new Item();
                 //创建list每一个对象，并封装
                 if (i == 0) {
-                    listItem.setHeadTitle(strToDateFormat(getDate()));
+                    listItem.setHeadTitle(strToDateFormat(getDate1()));
                 }
                 listItem.setTitle(item.optString("title"));
                 listItem.setPicurl(images.optString(0));
@@ -372,6 +389,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
 
     //刷新数据方法
     private void refreshinfo() {
+        otherDate =-1;
         mDatas.clear();
         String url = null;
         url = "http://news-at.zhihu.com/api/4/news/latest";
@@ -503,7 +521,83 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickList
         formatter = new SimpleDateFormat("yyyy-MM-dd");
         return formatter.format(newDate);
     }
+    private void initbannar() {
+        bantitles = new ArrayList<>();
+        banids = new ArrayList<>();
+        banimgs = new ArrayList<>();
+        bannerList = new ArrayList<>();
+        String url = "http://news-at.zhihu.com/api/4/news/latest";
+        HttpConnect.sendHttpRequest(url, new HttpCallbackListener() {
+            @Override
+            public void onFinish(String response) {
+                Log.d("成功", "onFinish: ");
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray topinfos = jsonObject.getJSONArray("top_stories");
+                    Log.d("TAG", "onResponse: "+topinfos);
+                    for (int i = 0; i < topinfos.length(); i++) {
+                        JSONObject item = topinfos.getJSONObject(i);
+                        Item item1 = new Item();
+                        item1.setPicurl(item.getString("image"));
+                        item1.setTitle(item.getString("title"));
+                        item1.setId(item.getString("id"));
+                        bannerList.add(item1);
+                        bantitles.add(item1.getTitle());
+                        banimgs.add(item1.getPicurl());
+                        banids.add(item1.getId());
+                    }
 
+
+                    setHeader(mInfoList, banimgs, bantitles, banids);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Log.d("网络请求错误", "onError: ");
+                e.printStackTrace();
+            }
+        });
+
+    }
+
+    private void setHeader(RecyclerView view, ArrayList<String> urls, ArrayList<String> titles, final ArrayList<String> ids) {
+        View header = LayoutInflater.from(this).inflate(R.layout.headview, view, false);
+        //找到banner所在的布局
+        BGABanner banner = (BGABanner) header.findViewById(R.id.banner);
+        //绑定banner
+        banner.setAdapter(new BGABanner.Adapter<ImageView, String>() {
+
+
+            @Override
+            public void fillBannerItem(BGABanner banner, ImageView itemView, String model, int position) {
+                Glide.with(MainActivity.this)
+                        .load(model)
+                        .centerCrop()
+                        .dontAnimate()
+                        .into(itemView);
+            }
+        });
+        banner.setDelegate(new BGABanner.Delegate() {
+            @Override
+            public void onBannerItemClick(BGABanner banner, View itemView, Object model, int position) {
+                //此处可设置banner子项的点击事件
+                Item item = bannerList.get(position);
+                String id = item.getId();
+                String title = item.getTitle();
+                String imgUrl = item.getPicurl();
+                Intent intent = new Intent(MainActivity.this, NewsInfoActivity.class);
+                intent.putExtra("id", id);
+                intent.putExtra("title", title);
+                intent.putExtra("imgUrl", imgUrl);
+                startActivity(intent);
+            }
+        });
+        banner.setData(urls, titles);
+        mAdapter.setHeadView(header);
+    }
 }
 
 
